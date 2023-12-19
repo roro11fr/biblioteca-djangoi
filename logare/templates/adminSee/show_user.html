@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <ul>
+            <li>
+             Nume: {{user.username }}
+            </li>
+            <li>
+            Email: {{ user.email }}
+            </li>
+        </ul>
+        <form action="{% url 'delete_utilizator' user_id=user.id  %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Sterge userul" class="btn btn-outline-primary">
+        </form>
+        <form action="{% url 'dezactivate_utilizator' user_id=user.id  %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Dezactiveaza userul"class = "btn btn-outline-primary">
+        </form>
+        
+{% endblock %}

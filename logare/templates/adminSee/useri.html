@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Utilizatori Cautare</h1>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form  %}
+                {{ field.label_tag }}  {{ field }} 
+                <input type="submit" class="btn btn-outline-primary" value="Cauta">
+            {% endfor %}
+        </form>
+    </div>
+
+    {% if useri%}
+        <h2>Search Results</h2>
+    {% else %}
+        <h2>No Results</h>
+    {% endif %}
+
+        <ul>
+        {% for user in useri %}
+            <li>
+            <a href="{% url 'show_user' user_id=user.id %}" > {{user.username }}- {{ user.email }}</a>
+            </li>
+        {% endfor %}
+        </ul
+
+{% endblock %}

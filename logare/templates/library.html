@@ -1,0 +1,59 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Bun venit la biblioteca noastra</h1>
+    <p>Spor la citit!</p>
+    {% if user.is_superuser %}
+        <p>Hello, admin.</p>
+        <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+            <a href="{% url 'cautare' %}">
+                <button type="button" class="btn btn-outline-primary"> Cautare carte</button>
+            </a>            
+            <a href="{% url 'useri' %}">
+                <button type="button" class="btn btn-outline-primary"> Gestionare Useri</button>
+            </a>
+            <a href="{% url 'adaugare' %}">
+                <button type="button" class="btn btn-outline-primary"> Adaugare carte</button>
+            </a>
+            <a href="{% url 'raportare' %}">
+                <button type="button" class="btn btn-outline-primary">Raportare</button>
+            </a>
+          </div>
+
+
+
+    {% elif user%}
+        <h3> Carti Cautare</h3>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for field in formf  %}
+                    {{ field.label_tag }}  {{ field }} 
+                    <input type="submit" class="btn btn-outline-primary" value="Cauta">
+                {% endfor %}
+            </form>
+        </div>
+    
+
+          {% if books%}
+            <h3>Search Results</h3>
+                {% else %}
+            <h3>No Results</h3>
+        {% endif %}
+
+        <ul>
+
+            {% for book in books %}
+            <li>
+            <a href="{% url 'inchiriere' book_id=book.id %}" > {{book.name }}- {{ book.author }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+
+    {% endif %}
+
+
+{% endblock %}
+
+

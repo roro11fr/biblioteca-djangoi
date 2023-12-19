@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <ul>
+            <li>
+             Nume: {{book.name }}
+            </li>
+            <li>
+            Author: {{ book.author }}
+            </li>
+        </ul>
+        <form action="{% url 'inchiriat_carte' book_id=book.id  %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Inchiriaza Cartea"class = "btn btn-outline-primary">
+        </form>
+{% endblock %}

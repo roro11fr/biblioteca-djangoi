@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Raport</h2>
+    {% for inchirat in inchirieri %}
+        Citiorul <strong>{{ inchirat.user.username }}</strong> a luat 
+        {% if inchirat.book %} cartea 
+    <strong>{{ inchirat.book.name }}</strong> de la autorul <strong>{{ inchirat.book.author }}</strong>. 
+            Data estimată pentru returnare: {{ inchirat.data_returnare_estimata|date:"F j, Y H:i" }}
+
+
+        {% else %} o carte care nu mai există
+        {% endif %}
+        <br>
+    {% endfor %}
+
+
+    <h2>Cărți Disponibile</h2>
+    {% for book in books %}
+            {% if book.is_available%}
+            <br>
+        Cartea <strong> {{ book.name }}</strong> de la autorul <strong>{{ book.author }}</strong> este disponibilă.
+        {% endif%}
+    {% endfor %}
+{% endblock %}
